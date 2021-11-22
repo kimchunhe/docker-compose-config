@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mydb:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: odoodb
+      POSTGRES_PASSWORD: 1234qweR
+      POSTGRES_USER: odoo
+    logging:
+      driver: "none"
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  web:
+    image: odoo:latest
+    depends_on:
+      - mydb
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: mydb
+      DB_PORT: 5432
+      DB_USER: odoo
+      DB_PASS: 1234qweR
+      DB_NAME: odoodb
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "8069:8069"
+volumes:
+  db-data:
