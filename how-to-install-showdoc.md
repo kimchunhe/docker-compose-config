@@ -16,7 +16,7 @@ apt-get install zip unzip
 yum -y install zip unzip
 
 #backup
-zip -r /showdoc_data/html /showdoc_data/sdd.zip
+zip -r /showdoc_data/sdd.zip /showdoc_data/html
 
 #data migration
 scp -r root@10.21.156.6:/showdoc_data/html/  sdd.zip
